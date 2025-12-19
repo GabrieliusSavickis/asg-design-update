@@ -5,7 +5,6 @@ import AppointmentModal from '../components/AppointmentModal/AppointmentModal';
 import { firestore } from '../firebase'; // Import Firestore
 import { collection, addDoc, doc, updateDoc, deleteDoc, query, where, setDoc, onSnapshot, getDocs } from 'firebase/firestore';
 import DatePicker from '../components/DatePicker/DatePicker';
-import './AppointmentsPage.css';
 
 function AppointmentsPage() {
   // Determine the domain
@@ -404,6 +403,46 @@ function AppointmentsPage() {
         </div>
         {warningMessage && <div className="alert-warning">{warningMessage}</div>}
         <div className="card calendar-card">
+    <div className="min-h-screen bg-slate-50">
+      <Header />
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 pb-12 pt-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-card">
+          <div>
+            <h1 className="text-2xl font-semibold text-slate-900">Appointments</h1>
+            <p className="mt-2 text-sm text-slate-500">
+              Review daily bookings, check-in status, and technician schedules at a glance.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+              {selectedDate.toLocaleDateString('en-IE', { weekday: 'short', day: 'numeric', month: 'short' })}
+            </span>
+            <button
+              type="button"
+              onClick={handleTodayClick}
+              className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
+            >
+              Jump to Today
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
+            <div className="text-sm text-slate-500">
+              Select a date to view bookings and manage slots.
+            </div>
+          </div>
+        </div>
+
+        {warningMessage && (
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
+            {warningMessage}
+          </div>
+        )}
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-card">
           <Calendar
             appointments={appointments}
             onTimeSlotClick={handleTimeSlotClick}

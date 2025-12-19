@@ -27,7 +27,11 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // or a loading spinner
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-sm font-semibold uppercase tracking-wide text-white">
+        Loading...
+      </div>
+    );
   }
 
   return (

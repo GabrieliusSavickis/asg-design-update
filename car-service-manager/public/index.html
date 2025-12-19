@@ -9,6 +9,41 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#fff5f2',
+                100: '#ffe6de',
+                200: '#ffc6b2',
+                300: '#ffa082',
+                400: '#f8704f',
+                500: '#e25536',
+                600: '#c23b22',
+                700: '#9a2f1c',
+                800: '#7c261a',
+                900: '#5a1a12',
+              },
+            },
+            boxShadow: {
+              card: '0 20px 40px rgba(15, 23, 42, 0.08)',
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a

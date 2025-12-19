@@ -5,7 +5,6 @@ import { firestore } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import './LoginPage.css';
 
 function LoginPage() {
   const [loginInput, setLoginInput] = useState(''); // This will hold either username or email
@@ -96,22 +95,63 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="input"
                 placeholder="Enter your password"
-                required
-              />
-              <span
-                className="password-toggle-icon"
-                onClick={() => setShowPassword((prev) => !prev)}
-                tabIndex="0"
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    setShowPassword((prev) => !prev);
-                  }
-                }}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
-              >
-                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-              </span>
+    <div className="min-h-screen bg-slate-950/80 bg-[url('/assets/garage-background.jpg')] bg-cover bg-center">
+      <div className="flex min-h-screen items-center justify-center bg-slate-950/60 px-4 py-12">
+        <div className="w-full max-w-md rounded-3xl bg-white/90 p-8 shadow-card backdrop-blur">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-600/10">
+              <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="h-10 w-auto object-contain" />
             </div>
+            <h2 className="mt-4 text-2xl font-semibold text-slate-900">Welcome back</h2>
+            <p className="mt-2 text-sm text-slate-500">
+              Sign in to manage appointments, accounts, and technician workloads.
+            </p>
+          </div>
+          <form onSubmit={handleLogin} className="mt-6 space-y-5">
+            <div>
+              <label className="text-sm font-medium text-slate-700">Username or Email</label>
+              <input
+                type="text"
+                value={loginInput}
+                onChange={(e) => setLoginInput(e.target.value)}
+                required
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium text-slate-700">Password</label>
+              <div className="relative mt-2">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-12 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200"
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-brand-600"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </button>
+              </div>
+            </div>
+            {error && (
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                {error}
+              </div>
+            )}
+            <button
+              type="submit"
+              className="w-full rounded-xl bg-brand-600 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
+            >
+              Log In
+            </button>
+          </form>
+          <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500">
+            Need access? Contact your administrator to update your profile or reset credentials.
           </div>
           {error && <p className="error">{error}</p>}
           <button type="submit" className="btn btn-primary login-button">
