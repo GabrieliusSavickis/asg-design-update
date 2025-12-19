@@ -102,6 +102,23 @@ const AccountsPage = () => {
   };
 
   return (
+    <div className="page-shell">
+      <Header />
+      <main className="page-content accounts-page">
+        <div className="page-header">
+          <div>
+            <p className="page-eyebrow">Customer profiles</p>
+            <h1 className="page-title">Accounts</h1>
+          </div>
+        </div>
+
+        <div className="card search-card">
+          <div className="search-box">
+            <label className="field-label" htmlFor="account-search">
+              Search by vehicle registration
+            </label>
+            <input
+              id="account-search"
     <div className="min-h-screen bg-slate-50">
       <Header />
       <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 pb-12 pt-6">
@@ -116,6 +133,41 @@ const AccountsPage = () => {
               placeholder="Search by Vehicle Reg"
               value={searchReg}
               onChange={handleSearchChange}
+              className="input"
+            />
+          </div>
+        </div>
+
+        <div className="card table-card">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Vehicle Reg</th>
+                <th>Customer Name</th>
+                <th>Customer Phone</th>
+                <th>Vehicle Make</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(searchReg === '' ? accounts : filteredAccounts).map(account => (
+                <tr key={account.vehicleReg}>
+                  <td>{account.vehicleReg}</td>
+                  <td>{account.customerName}</td>
+                  <td>{account.customerPhone}</td>
+                  <td>{account.vehicleMake}</td>
+                  <td>
+                    <button
+                      className="btn btn-secondary table-action"
+                      onClick={() => handleViewServiceHistory(account.vehicleReg)}
+                    >
+                      History
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
               className="w-full max-w-xs rounded-full border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200"
             />
             <span className="text-xs text-slate-400">
@@ -161,6 +213,15 @@ const AccountsPage = () => {
 
         {selectedAccount && (
           <>
+            <div className="modal-overlay" onClick={() => setSelectedAccount(null)}></div>
+            <div className="service-history-modal">
+              <h2>Service History for {selectedAccount}</h2>
+              <div className="service-history-list">
+                {serviceHistory.length > 0 ? (
+                  serviceHistory.map(appointment => (
+                    <div key={appointment.id} className="appointment-entry">
+                      <div
+                        className="appointment-summary"
             <div className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm" onClick={() => setSelectedAccount(null)}></div>
             <div className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-slate-200 bg-white p-6 shadow-card">
               <div className="flex items-start justify-between gap-4">
@@ -192,12 +253,35 @@ const AccountsPage = () => {
                           )
                         }
                       >
+                        <strong>Date:</strong> {appointment.formattedDateTime}
+                        <span className="toggle-icon">
                         <span>Date: {appointment.formattedDateTime}</span>
                         <span className="text-slate-400">
                           {appointment.isOpen ? <FaChevronUp /> : <FaChevronDown />}
                         </span>
                       </div>
                       <Collapse isOpened={appointment.isOpen}>
+                        <div className="appointment-details">
+                          <strong>Technician:</strong> {appointment.tech} <br />
+                          <strong>Tasks:</strong>
+                          <ul>
+                            {appointment.details.tasks && appointment.details.tasks.length > 0 ? (
+                              appointment.details.tasks.map((task, index) => (
+                                <li key={index}>
+                                  {task.completed ? (
+                                    <FaCheckCircle color="green" />
+                                  ) : (
+                                    <FaTimesCircle color="red" />
+                                  )}
+                                  {' '}
+                                  {task.text}
+                                </li>
+                              ))
+                            ) : (
+                              <li>No tasks available</li>
+                            )}
+                          </ul>
+                          <strong>Comments: </strong> {appointment.details.comments || 'No comments available'}
                         <div className="mt-3 space-y-3 text-sm text-slate-600">
                           <p>
                             <span className="font-semibold text-slate-700">Technician:</span> {appointment.tech}
@@ -230,6 +314,12 @@ const AccountsPage = () => {
                     </div>
                   ))
                 ) : (
+                  <p>No service history available for this vehicle.</p>
+                )}
+              </div>
+              <button className="btn btn-primary modal-close" onClick={() => setSelectedAccount(null)}>
+                Close
+              </button>
                   <p className="text-sm text-slate-500">No service history available for this vehicle.</p>
                 )}
               </div>

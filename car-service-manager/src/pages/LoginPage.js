@@ -62,6 +62,39 @@ function LoginPage() {
   };
 
   return (
+    <div className="login-page">
+      <div className="login-card">
+        <div className="login-brand">
+          <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="login-logo" />
+          <div>
+            <p className="login-eyebrow">ASG Service Manager</p>
+            <h2>Welcome back</h2>
+            <p className="login-subtitle">
+              Sign in to keep the workshop running smoothly.
+            </p>
+          </div>
+        </div>
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="form-group">
+            <label className="field-label">Username or Email</label>
+            <input
+              type="text"
+              value={loginInput}
+              onChange={(e) => setLoginInput(e.target.value)}
+              className="input"
+              placeholder="Enter your username or email"
+              required
+            />
+          </div>
+          <div className="form-group password-group">
+            <label className="field-label">Password</label>
+            <div className="password-input-container">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input"
+                placeholder="Enter your password"
     <div className="min-h-screen bg-slate-950/80 bg-[url('/assets/garage-background.jpg')] bg-cover bg-center">
       <div className="flex min-h-screen items-center justify-center bg-slate-950/60 px-4 py-12">
         <div className="w-full max-w-md rounded-3xl bg-white/90 p-8 shadow-card backdrop-blur">
@@ -120,6 +153,13 @@ function LoginPage() {
           <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500">
             Need access? Contact your administrator to update your profile or reset credentials.
           </div>
+          {error && <p className="error">{error}</p>}
+          <button type="submit" className="btn btn-primary login-button">
+            Log In
+          </button>
+        </form>
+        <div className="login-footer">
+          <span className="badge">Secure access</span>
         </div>
       </div>
     </div>

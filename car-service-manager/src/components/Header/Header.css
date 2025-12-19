@@ -1,59 +1,115 @@
 /* src/components/Header.css */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 80px; /* Set a specific height for the header */
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-links {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .nav-link {
-    padding: 5px 10px;
-    text-decoration: none;
-    color: #fff; /* Set text color to white */
-    background-color: #c23b22; /* Update this to match your design */
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    text-align: center;
-  }
-  
-  .nav-link:hover {
-    background-color: #a32e1c; /* Slightly darker shade for hover effect */
-  }
-
-
-.logout-icon {
-  color: #c23b22;
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: color 0.3s;
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
-.logout-icon:hover {
-  color: #a32e1c;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.username-display {
-  color: #333;
-  font-size: 1rem;
-  margin-right: 15px;
-  align-self: center;
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: #0f172a;
+  padding: 8px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.brand-subtitle {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #1e293b;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav-link:hover {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-pill {
+  background: #eff6ff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
 }
 
 .username {
-  font-weight: bold; /* Only the username will be bold */
+  font-weight: 700;
+  font-size: 13px;
+  color: #1e293b;
+}
+
+.logout-button {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
   

@@ -58,6 +58,31 @@ function Header() {
   }
 
   return (
+    <header className="app-header">
+      <div className="brand">
+        <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="brand-logo" />
+        <div className="brand-text">
+          <span className="brand-name">ASG Service Manager</span>
+          <span className="brand-subtitle">Workshop operations</span>
+        </div>
+      </div>
+      <nav className="nav-links">
+        <Link to="/appointments" className="nav-link">Appointments</Link>
+        <Link to="/accounts" className="nav-link">Accounts</Link>
+        <Link to="/technician-hours" className="nav-link">Hours</Link>
+      </nav>
+      <div className="header-actions">
+        {username && (
+          <div className="user-pill">
+            <span className="user-label">Signed in</span>
+            <span className="username">{username}</span>
+          </div>
+        )}
+        <button type="button" className="btn btn-secondary logout-button" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          Logout
+        </button>
+      </div>
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
         <div className="flex items-center gap-3">
