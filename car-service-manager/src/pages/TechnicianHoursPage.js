@@ -3,7 +3,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { firestore } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import './TechnicianHoursPage.css';
 import Header from '../components/Header/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
@@ -73,59 +72,66 @@ const TechnicianHoursPage = () => {
   }, [startDate, endDate, appointmentsCollectionName]); // Add appointmentsCollectionName as a dependency
 
   return (
-    <div>
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />
-      <div className="technician-hours-container">
-        <h1>Technician Hours</h1>
+      <main className="mx-auto w-full max-w-6xl px-6 py-8">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Productivity</p>
+            <h1 className="text-3xl font-semibold">Technician Hours</h1>
+            <p className="mt-2 text-sm text-slate-500">
+              Review completed work ranges and keep track of technician output.
+            </p>
+          </div>
+          <div className="relative">
+            <button
+              onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+              className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300"
+            >
+              <FontAwesomeIcon icon={faCalendarAlt} />
+              Select date range
+            </button>
 
-        <div className="date-picker-trigger">
-          <button
-            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
-            className="calendar-icon-button"
-          >
-            <FontAwesomeIcon icon={faCalendarAlt} size="2x" />
-          </button>
-
-          {isDatePickerOpen && (
-            <div className="date-picker-container">
-              <DatePicker
-                selected={startDate}
-                onChange={(dates) => {
-                  const [start, end] = dates;
-                  setStartDate(start);
-                  setEndDate(end);
-                }}
-                startDate={startDate}
-                endDate={endDate}
-                selectsRange
-                inline
-              />
-            </div>
-          )}
+            {isDatePickerOpen && (
+              <div className="absolute right-0 top-14 z-20 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
+                <DatePicker
+                  selected={startDate}
+                  onChange={(dates) => {
+                    const [start, end] = dates;
+                    setStartDate(start);
+                    setEndDate(end);
+                  }}
+                  startDate={startDate}
+                  endDate={endDate}
+                  selectsRange
+                  inline
+                />
+              </div>
+            )}
+          </div>
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Technician</th>
-              <th>Total Hours</th>
-            </tr>
-          </thead>
-          <tbody>
-            {technicianHours.map((tech, index) => (
-              <tr key={index}>
-                <td>{tech.tech}</td>
-                <td>
-                  {tech.hours} hours {tech.minutes} minutes
-                </td>
+        <div className="mt-6 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-slate-100 text-xs uppercase tracking-wider text-slate-500">
+              <tr>
+                <th className="px-5 py-4">Technician</th>
+                <th className="px-5 py-4">Total Hours</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div id="testing">
-        Testing
-      </div>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {technicianHours.map((tech, index) => (
+                <tr key={index} className="hover:bg-slate-50">
+                  <td className="px-5 py-4 font-semibold text-slate-900">{tech.tech}</td>
+                  <td className="px-5 py-4 text-slate-600">
+                    {tech.hours} hours {tech.minutes} minutes
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   );
 };

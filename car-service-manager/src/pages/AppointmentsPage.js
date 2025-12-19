@@ -5,7 +5,6 @@ import AppointmentModal from '../components/AppointmentModal/AppointmentModal';
 import { firestore } from '../firebase'; // Import Firestore
 import { collection, addDoc, doc, updateDoc, deleteDoc, query, where, setDoc, onSnapshot, getDocs } from 'firebase/firestore';
 import DatePicker from '../components/DatePicker/DatePicker';
-import './AppointmentsPage.css';
 
 function AppointmentsPage() {
   // Determine the domain
@@ -387,21 +386,40 @@ function AppointmentsPage() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />
-      <h1>Appointments</h1>
-      <div className="top-controls">
-        <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
-        <button className="today-button" onClick={handleTodayClick}>
-          Today
-        </button>
-      </div>
-      {warningMessage && <p className="warning-message">{warningMessage}</p>}
-      <Calendar
-        appointments={appointments}
-        onTimeSlotClick={handleTimeSlotClick}
-        technicians={technicians}
-      />
+      <main className="mx-auto w-full max-w-6xl px-6 py-8">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Schedule</p>
+            <h1 className="text-3xl font-semibold">Appointments</h1>
+            <p className="mt-2 text-sm text-slate-500">
+              Manage technician workloads and track service progress in real time.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
+            <button
+              className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-slate-900/20 transition hover:bg-slate-800"
+              onClick={handleTodayClick}
+            >
+              Today
+            </button>
+          </div>
+        </div>
+        {warningMessage && (
+          <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {warningMessage}
+          </div>
+        )}
+        <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+          <Calendar
+            appointments={appointments}
+            onTimeSlotClick={handleTimeSlotClick}
+            technicians={technicians}
+          />
+        </div>
+      </main>
       {isModalOpen && (
         <AppointmentModal
           appointment={selectedAppointment}

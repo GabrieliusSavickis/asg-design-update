@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import './Header.css';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import { firestore } from '../../firebase';
 
@@ -59,21 +58,51 @@ function Header() {
   }
 
   return (
-    <header className="header">
-      <div className="logo-container">
-        <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="logo" />
+    <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/80 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 shadow-lg shadow-slate-900/20">
+            <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="h-8 w-8 object-contain" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">ASG</p>
+            <p className="text-lg font-semibold text-slate-900">Service Manager</p>
+          </div>
+        </div>
+        <nav className="flex items-center gap-3 text-sm font-medium text-slate-600">
+          <Link
+            to="/appointments"
+            className="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-300 hover:text-slate-900"
+          >
+            Appointments
+          </Link>
+          <Link
+            to="/accounts"
+            className="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-300 hover:text-slate-900"
+          >
+            Accounts
+          </Link>
+          <Link
+            to="/technician-hours"
+            className="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-300 hover:text-slate-900"
+          >
+            Hours
+          </Link>
+          {username && (
+            <span className="hidden items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-slate-700 md:flex">
+              Logged in as <span className="font-semibold text-slate-900">{username}</span>
+            </span>
+          )}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-white shadow-lg shadow-slate-900/20 transition hover:bg-slate-800"
+          >
+            <FontAwesomeIcon icon={faSignOutAlt} />
+            Sign out
+          </button>
+        </nav>
       </div>
-      <nav className="nav-links">
-        <Link to="/appointments" className="nav-link">Appointments</Link>
-        <Link to="/accounts" className="nav-link">Accounts</Link>
-        <Link to="/technician-hours" className="nav-link">Hours</Link>
-        {username && <span className="username-display">Logged in as <span className="username">{username}</span></span>}
-        <FontAwesomeIcon
-          icon={faSignOutAlt}
-          className="logout-icon"
-          onClick={handleLogout}
-        />
-      </nav>
     </header>
   );
 }
