@@ -1,0 +1,124 @@
+.calendar-container {
+  display: grid;
+  /* grid-template-columns: 100px repeat(4, 1fr); Adjust column sizes */
+  background-color: #ddd;
+}
+
+.calendar-header {
+  display: contents;
+}
+
+.time-header {
+  grid-column: 1;
+  background-color: #f0f0f0;
+}
+
+.tech-header {
+  background-color: #f0f0f0;
+  padding: 5px;
+  text-align: center;
+}
+
+.calendar-body {
+  display: contents;
+}
+
+.time-slot-row {
+  display: contents;
+}
+
+.time-label {
+  background-color: #f9f9f9;
+  padding: 10px;
+  text-align: center;
+}
+
+.time-slot {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  position: relative;
+  overflow: visible;
+}
+
+.time-slot.lunch-time-slot {
+  background-color: #ccc; /* Gray out lunch time slots */
+  pointer-events: none; /* Disable clicking */
+}
+
+.appointment {
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  z-index: 1;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease; /* Smooth transition for color changes */
+  font-size: 0.9em;
+}
+
+/* New styles for lunch break */
+.lunch-break-divider {
+  grid-column: 1 / span 5; /* Span across the entire grid */
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px; /* Adjust height if needed */
+  font-weight: bold;
+  z-index: 10; /* This makes the lunch break divider appear on top */
+  color: #555;
+}
+
+.lunch-break-label {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Tablet-specific styles in portrait mode */
+@media screen and (max-width: 800px) {
+  .calendar-container {
+    grid-template-columns: 70px repeat(4, 1fr); /* Adjust for narrower screens */
+    margin: 10px auto; /* Reduce margin on smaller screens */
+  }
+
+  .time-label {
+    display: inline-grid;
+    width: 58px; /* Narrow time labels */
+    padding: 7px; /* Adjust padding for time labels */
+  }
+
+  .appointment {
+    font-size: 0.7rem; /* Reduce font size for better fit */
+    padding: 3px; /* Adjust padding for appointments */
+  }
+
+  .calendar-header {
+    font-size: 0.85rem; /* Adjust header font size */
+    padding: 5px; /* Reduce padding for header */
+  }
+
+  .lunch-break-divider {
+    height: 30px; /* Reduce height for lunch break divider */
+    font-size: 1rem; /* Adjust font size for lunch label */
+  }
+
+  .lunch-break-label {
+    font-size: 1rem; /* Adjust font size for lunch break text */
+  }
+}
+
+.appointment-time {
+  margin-bottom: 2px;
+  text-align: center;
+  color: #fff; /* Ensures it contrasts on your colored background */
+}
