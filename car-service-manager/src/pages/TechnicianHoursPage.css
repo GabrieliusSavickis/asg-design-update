@@ -1,14 +1,58 @@
-.calendar-icon-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.date-picker-container {
-  margin-bottom: 24px;
-  box-shadow: var(--shadow);
-  background-color: #fff;
-  border-radius: 18px;
-  padding: 12px;
-  width: fit-content;
-}
+.technician-hours-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .date-picker-trigger {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .calendar-icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #333; /* Set the icon color to dark gray or any visible color */
+  }
+  
+  .calendar-icon-button:hover {
+    color: #ffffff; /* Optional: Change color on hover to match your theme */
+  }
+  
+  .date-picker-container {
+    position: absolute;
+    top: 50px; /* Adjust this as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  

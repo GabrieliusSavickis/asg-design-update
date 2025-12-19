@@ -7,19 +7,17 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   overflow-y: auto;
 }
 
 .modal-content {
   background-color: #fff;
-  padding: 24px;
-  border-radius: 18px;
-  width: min(640px, 95vw); /* Increased width to accommodate the new layout */
+  padding: 20px;
+  border-radius: 5px;
+  width: 500px; /* Increased width to accommodate the new layout */
   position: relative;
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.35);
 
   max-height: 80vh; /* Maximum height is 80% of the viewport height */
   overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
@@ -27,61 +25,51 @@
 
 .close {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 10px;
+  right: 10px;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #94a3b8;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 form label {
   display: flex;
   flex-direction: column;
-  font-weight: 600;
-  font-size: 13px;
-  color: #475569;
+  font-weight: bold;
 }
 
-form input,
-form textarea,
-form select {
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 14px;
-  margin-top: 6px;
+form input, form textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 form button {
-  padding: 10px 16px;
-  background-color: #2563eb;
+  padding: 10px;
+  background-color: #c23b22;
   color: #fff;
   border: none;
-  border-radius: 999px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 form button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
+  background-color: #a32e1c;
 }
 
 .delete-button {
-  background-color: #ef4444;
+  background-color: #d9534f;
   margin-top: 10px;
   width: 100%; /* Make delete button full width */
 }
 
 .delete-button:hover {
-  background-color: #dc2626;
+  background-color: #c9302c;
 }
 
 .todo-list-section {
@@ -97,7 +85,6 @@ form button:hover {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  gap: 8px;
 }
 
 .task-circle {
@@ -127,32 +114,38 @@ form button:hover {
 
 .new-task-input input {
   flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .new-task-input button {
-  background-color: #0ea5e9;
+  padding: 8px 12px;
+  background-color: #2297c2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .new-task-input button:hover {
-  background-color: #0284c7;
+  background-color: #1e86ae;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
 }
 
 .print-icon, .reschedule-icon {
   cursor: pointer;
   font-size: 1.5rem;
-  color: #475569; /* Adjust color to match your theme */
+  color: #333; /* Adjust color to match your theme */
 }
 
 .print-icon:hover, .reschedule-icon:hover {
-  color: #2563eb; /* Change color on hover */
+  color: #c23b22; /* Change color on hover */
 }
 
 /* Align buttons side by side */
@@ -165,44 +158,23 @@ form button:hover {
   flex: 1;
 }
 
-.checkin-button {
-  background-color: #16a34a;
-}
-
-.checkin-button:hover {
-  background-color: #15803d;
-}
-
-.pause-button {
-  background-color: #f59e0b;
-}
-
-.pause-button:hover {
-  background-color: #d97706;
-}
-
-.resume-button {
-  background-color: #0ea5e9;
-}
-
-.resume-button:hover {
-  background-color: #0284c7;
-}
-
 .comments-section {
   margin-top: 20px;
 }
 
 .comments-section textarea {
-  width: 100%;
+  width: 90%;
   height: 80px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   resize: none;
 }
 
 .technician-time-section {
   margin-top: 20px;
   padding: 10px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #ccc;
 }
 
 .technician-time-section h3 {
@@ -239,39 +211,15 @@ form button:hover {
   gap: 10px;
 }
 
-.appointment-form {
-  display: grid;
-  gap: 20px;
-}
-
-.left-section,
-.right-section {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.appointment-form > .admin-info,
-.appointment-form > .button-group,
-.appointment-form > .delete-button {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 900px) {
-  .appointment-form {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 .reschedule-modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.35);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1100;
 }
 
@@ -288,22 +236,22 @@ form button:hover {
 
 .reschedule-content input,
 .reschedule-content select {
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .reschedule-content button {
-  padding: 10px 16px;
-  background-color: #2563eb;
+  padding: 10px;
+  background-color: #2297c2;
   color: white;
   border: none;
-  border-radius: 999px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .reschedule-content button:hover {
-  background-color: #1d4ed8;
+  background-color: #1e86ae;
 }
 
 .time-validation-section {
@@ -324,13 +272,6 @@ form button:hover {
 
 .time-validation-controls select {
   width: 120px; /* Adjust this value to make the select field wider */
-}
-
-.time-validation-controls {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 .admin-info p {
