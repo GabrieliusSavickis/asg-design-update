@@ -386,33 +386,46 @@ function AppointmentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50">
       <Header />
-      <main className="mx-auto w-full max-w-6xl px-6 py-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 pb-12 pt-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-card">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Schedule</p>
-            <h1 className="text-3xl font-semibold">Appointments</h1>
+            <h1 className="text-2xl font-semibold text-slate-900">Appointments</h1>
             <p className="mt-2 text-sm text-slate-500">
-              Manage technician workloads and track service progress in real time.
+              Review daily bookings, check-in status, and technician schedules at a glance.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-            <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+              {selectedDate.toLocaleDateString('en-IE', { weekday: 'short', day: 'numeric', month: 'short' })}
+            </span>
             <button
-              className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-slate-900/20 transition hover:bg-slate-800"
+              type="button"
               onClick={handleTodayClick}
+              className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
             >
-              Today
+              Jump to Today
             </button>
           </div>
         </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
+            <div className="text-sm text-slate-500">
+              Select a date to view bookings and manage slots.
+            </div>
+          </div>
+        </div>
+
         {warningMessage && (
-          <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
             {warningMessage}
           </div>
         )}
-        <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-card">
           <Calendar
             appointments={appointments}
             onTimeSlotClick={handleTimeSlotClick}

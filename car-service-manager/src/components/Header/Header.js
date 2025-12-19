@@ -58,48 +58,49 @@ function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 shadow-lg shadow-slate-900/20">
-            <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="h-8 w-8 object-contain" />
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-600/10">
+            <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="h-7 w-auto object-contain" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">ASG</p>
-            <p className="text-lg font-semibold text-slate-900">Service Manager</p>
+            <p className="text-sm font-semibold text-slate-900">ASG Service Desk</p>
+            <p className="text-xs text-slate-500">Operations & scheduling</p>
           </div>
         </div>
-        <nav className="flex items-center gap-3 text-sm font-medium text-slate-600">
+        <nav className="flex flex-wrap items-center gap-3">
           <Link
             to="/appointments"
-            className="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-300 hover:text-slate-900"
+            className="rounded-full border border-transparent bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
           >
             Appointments
           </Link>
           <Link
             to="/accounts"
-            className="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-300 hover:text-slate-900"
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand-200 hover:text-brand-700"
           >
             Accounts
           </Link>
           <Link
             to="/technician-hours"
-            className="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-300 hover:text-slate-900"
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand-200 hover:text-brand-700"
           >
             Hours
           </Link>
           {username && (
-            <span className="hidden items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-slate-700 md:flex">
+            <span className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 md:flex">
               Logged in as <span className="font-semibold text-slate-900">{username}</span>
             </span>
           )}
           <button
             type="button"
             onClick={handleLogout}
-            className="flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-white shadow-lg shadow-slate-900/20 transition hover:bg-slate-800"
+            className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-brand-200 hover:text-brand-700"
+            aria-label="Log out"
           >
             <FontAwesomeIcon icon={faSignOutAlt} />
-            Sign out
+            <span className="hidden sm:inline">Logout</span>
           </button>
         </nav>
       </div>
