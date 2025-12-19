@@ -77,15 +77,15 @@ const TechnicianHoursPage = () => {
       <Header />
       <div className="technician-hours-container">
         <h1>Technician Hours</h1>
-        
+
         <div className="date-picker-trigger">
-          <button 
-            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)} 
+          <button
+            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
             className="calendar-icon-button"
           >
             <FontAwesomeIcon icon={faCalendarAlt} size="2x" />
           </button>
-          
+
           {isDatePickerOpen && (
             <div className="date-picker-container">
               <DatePicker
@@ -122,6 +122,9 @@ const TechnicianHoursPage = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div id="testing">
+        Testing
       </div>
     </div>
   );
