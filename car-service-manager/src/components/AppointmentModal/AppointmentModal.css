@@ -7,69 +7,92 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(15, 23, 42, 0.6);
   z-index: 1000;
   overflow-y: auto;
+  backdrop-filter: blur(6px);
 }
 
 .modal-content {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 500px; /* Increased width to accommodate the new layout */
+  padding: 28px;
+  border-radius: 24px;
+  width: min(90vw, 760px);
   position: relative;
-
-  max-height: 80vh; /* Maximum height is 80% of the viewport height */
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+  max-height: 85vh; /* Maximum height is 80% of the viewport height */
   overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
 }
 
 .close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
+  top: 16px;
+  right: 18px;
+  font-size: 1.6rem;
   cursor: pointer;
+  color: #94a3b8;
+  transition: color 0.2s ease;
 }
 
-form {
+.close:hover {
+  color: #1f2937;
+}
+
+.appointment-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-form label {
+.appointment-form label {
   display: flex;
   flex-direction: column;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #475569;
+  gap: 6px;
 }
 
-form input, form textarea {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.appointment-form input, .appointment-form textarea, .appointment-form select {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-form button {
-  padding: 10px;
-  background-color: #c23b22;
+.appointment-form input:focus, .appointment-form textarea:focus, .appointment-form select:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.25);
+}
+
+.appointment-form button {
+  padding: 10px 12px;
+  background-color: #0f172a;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-form button:hover {
-  background-color: #a32e1c;
+.appointment-form button:hover {
+  background-color: #1f2937;
+  transform: translateY(-1px);
 }
 
 .delete-button {
-  background-color: #d9534f;
+  background-color: #dc2626;
   margin-top: 10px;
   width: 100%; /* Make delete button full width */
 }
 
 .delete-button:hover {
-  background-color: #c9302c;
+  background-color: #b91c1c;
 }
 
 .todo-list-section {
@@ -114,22 +137,23 @@ form button:hover {
 
 .new-task-input input {
   flex-grow: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #f8fafc;
 }
 
 .new-task-input button {
   padding: 8px 12px;
-  background-color: #2297c2;
+  background-color: #2563eb;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .new-task-input button:hover {
-  background-color: #1e86ae;
+  background-color: #1d4ed8;
 }
 
 .modal-header {
@@ -141,11 +165,11 @@ form button:hover {
 .print-icon, .reschedule-icon {
   cursor: pointer;
   font-size: 1.5rem;
-  color: #333; /* Adjust color to match your theme */
+  color: #475569; /* Adjust color to match your theme */
 }
 
 .print-icon:hover, .reschedule-icon:hover {
-  color: #c23b22; /* Change color on hover */
+  color: #0f172a; /* Change color on hover */
 }
 
 /* Align buttons side by side */
@@ -163,18 +187,18 @@ form button:hover {
 }
 
 .comments-section textarea {
-  width: 90%;
-  height: 80px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 100%;
+  height: 90px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   resize: none;
 }
 
 .technician-time-section {
   margin-top: 20px;
   padding: 10px;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #e2e8f0;
 }
 
 .technician-time-section h3 {
@@ -217,10 +241,11 @@ form button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
   z-index: 1100;
+  width: min(90vw, 420px);
 }
 
 .reschedule-content {
@@ -236,22 +261,24 @@ form button:hover {
 
 .reschedule-content input,
 .reschedule-content select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #f8fafc;
 }
 
 .reschedule-content button {
   padding: 10px;
-  background-color: #2297c2;
+  background-color: #0f172a;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .reschedule-content button:hover {
-  background-color: #1e86ae;
+  background-color: #1f2937;
 }
 
 .time-validation-section {
@@ -276,6 +303,6 @@ form button:hover {
 
 .admin-info p {
   font-size: 0.8em; /* Adjust the font size as needed */
-  color: #555;      /* Optional: make the text a bit lighter */
+  color: #64748b;      /* Optional: make the text a bit lighter */
   text-align: left;
 }
