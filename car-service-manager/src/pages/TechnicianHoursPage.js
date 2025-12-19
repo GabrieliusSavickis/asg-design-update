@@ -73,59 +73,63 @@ const TechnicianHoursPage = () => {
   }, [startDate, endDate, appointmentsCollectionName]); // Add appointmentsCollectionName as a dependency
 
   return (
-    <div>
+    <div className="page-shell">
       <Header />
-      <div className="technician-hours-container">
-        <h1>Technician Hours</h1>
-
-        <div className="date-picker-trigger">
-          <button
-            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
-            className="calendar-icon-button"
-          >
-            <FontAwesomeIcon icon={faCalendarAlt} size="2x" />
-          </button>
-
-          {isDatePickerOpen && (
-            <div className="date-picker-container">
-              <DatePicker
-                selected={startDate}
-                onChange={(dates) => {
-                  const [start, end] = dates;
-                  setStartDate(start);
-                  setEndDate(end);
-                }}
-                startDate={startDate}
-                endDate={endDate}
-                selectsRange
-                inline
-              />
-            </div>
-          )}
+      <main className="page-content">
+        <div className="page-header">
+          <div>
+            <p className="page-eyebrow">Performance overview</p>
+            <h1 className="page-title">Technician Hours</h1>
+          </div>
+          <div className="page-actions">
+            <button
+              onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+              className="btn btn-secondary calendar-icon-button"
+            >
+              <FontAwesomeIcon icon={faCalendarAlt} />
+              Select range
+            </button>
+          </div>
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Technician</th>
-              <th>Total Hours</th>
-            </tr>
-          </thead>
-          <tbody>
-            {technicianHours.map((tech, index) => (
-              <tr key={index}>
-                <td>{tech.tech}</td>
-                <td>
-                  {tech.hours} hours {tech.minutes} minutes
-                </td>
+        {isDatePickerOpen && (
+          <div className="date-picker-container">
+            <DatePicker
+              selected={startDate}
+              onChange={(dates) => {
+                const [start, end] = dates;
+                setStartDate(start);
+                setEndDate(end);
+              }}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              inline
+            />
+          </div>
+        )}
+
+        <div className="card table-card">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Technician</th>
+                <th>Total Hours</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div id="testing">
-        Testing
-      </div>
+            </thead>
+            <tbody>
+              {technicianHours.map((tech, index) => (
+                <tr key={index}>
+                  <td>{tech.tech}</td>
+                  <td>
+                    {tech.hours} hours {tech.minutes} minutes
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   );
 };

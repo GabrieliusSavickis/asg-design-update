@@ -6,13 +6,14 @@ function DatePicker({ selectedDate, onDateChange }) {
   };
 
   return (
-    <div>
-      <label htmlFor="appointment-date">Select Date: </label>
+    <div className="date-picker">
+      <label className="field-label" htmlFor="appointment-date">Select date</label>
       <input
         type="date"
         id="appointment-date"
         value={selectedDate.toISOString().substr(0, 10)}
         onChange={handleChange}
+        className="input"
       />
     </div>
   );

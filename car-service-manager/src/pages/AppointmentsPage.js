@@ -387,21 +387,30 @@ function AppointmentsPage() {
   };
 
   return (
-    <div>
+    <div className="page-shell">
       <Header />
-      <h1>Appointments</h1>
-      <div className="top-controls">
-        <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
-        <button className="today-button" onClick={handleTodayClick}>
-          Today
-        </button>
-      </div>
-      {warningMessage && <p className="warning-message">{warningMessage}</p>}
-      <Calendar
-        appointments={appointments}
-        onTimeSlotClick={handleTimeSlotClick}
-        technicians={technicians}
-      />
+      <main className="page-content">
+        <div className="page-header">
+          <div>
+            <p className="page-eyebrow">Service calendar</p>
+            <h1 className="page-title">Appointments</h1>
+          </div>
+          <div className="page-actions">
+            <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
+            <button className="btn btn-secondary today-button" onClick={handleTodayClick}>
+              Today
+            </button>
+          </div>
+        </div>
+        {warningMessage && <div className="alert-warning">{warningMessage}</div>}
+        <div className="card calendar-card">
+          <Calendar
+            appointments={appointments}
+            onTimeSlotClick={handleTimeSlotClick}
+            technicians={technicians}
+          />
+        </div>
+      </main>
       {isModalOpen && (
         <AppointmentModal
           appointment={selectedAppointment}

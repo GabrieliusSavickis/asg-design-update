@@ -59,21 +59,31 @@ function Header() {
   }
 
   return (
-    <header className="header">
-      <div className="logo-container">
-        <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="logo" />
+    <header className="app-header">
+      <div className="brand">
+        <img src="/assets/ASG_Logo_white.jpg" alt="Logo" className="brand-logo" />
+        <div className="brand-text">
+          <span className="brand-name">ASG Service Manager</span>
+          <span className="brand-subtitle">Workshop operations</span>
+        </div>
       </div>
       <nav className="nav-links">
         <Link to="/appointments" className="nav-link">Appointments</Link>
         <Link to="/accounts" className="nav-link">Accounts</Link>
         <Link to="/technician-hours" className="nav-link">Hours</Link>
-        {username && <span className="username-display">Logged in as <span className="username">{username}</span></span>}
-        <FontAwesomeIcon
-          icon={faSignOutAlt}
-          className="logout-icon"
-          onClick={handleLogout}
-        />
       </nav>
+      <div className="header-actions">
+        {username && (
+          <div className="user-pill">
+            <span className="user-label">Signed in</span>
+            <span className="username">{username}</span>
+          </div>
+        )}
+        <button type="button" className="btn btn-secondary logout-button" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          Logout
+        </button>
+      </div>
     </header>
   );
 }

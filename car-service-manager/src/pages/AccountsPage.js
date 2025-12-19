@@ -103,118 +103,127 @@ const AccountsPage = () => {
   };
 
   return (
-    <div className="accounts-page">
+    <div className="page-shell">
       <Header />
-      <h1>Accounts</h1>
-
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Search by Vehicle Reg"
-          value={searchReg}
-          onChange={handleSearchChange}
-        />
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Vehicle Reg</th>
-            <th>Customer Name</th>
-            <th>Customer Phone</th>
-            <th>Vehicle Make</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchReg === '' ? accounts.map(account => (
-            <tr key={account.vehicleReg}>
-              <td>{account.vehicleReg}</td>
-              <td>{account.customerName}</td>
-              <td>{account.customerPhone}</td>
-              <td>{account.vehicleMake}</td>
-              <td>
-                <button onClick={() => handleViewServiceHistory(account.vehicleReg)}>
-                  History
-                </button>
-              </td>
-            </tr>
-          )) : filteredAccounts.map(account => (
-            <tr key={account.vehicleReg}>
-              <td>{account.vehicleReg}</td>
-              <td>{account.customerName}</td>
-              <td>{account.customerPhone}</td>
-              <td>{account.vehicleMake}</td>
-              <td>
-                <button onClick={() => handleViewServiceHistory(account.vehicleReg)}>
-                  History
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {selectedAccount && (
-        <>
-          <div className="modal-overlay" onClick={() => setSelectedAccount(null)}></div>
-          <div className="service-history-modal">
-            <h2>Service History for {selectedAccount}</h2>
-            <div className="service-history-list">
-              {serviceHistory.length > 0 ? (
-                serviceHistory.map(appointment => (
-                  <div key={appointment.id} className="appointment-entry">
-                    <div
-                      className="appointment-summary"
-                      onClick={() =>
-                        setServiceHistory(prev =>
-                          prev.map(app =>
-                            app.id === appointment.id
-                              ? { ...app, isOpen: !app.isOpen }
-                              : app
-                          )
-                        )
-                      }
-                    >
-                      <strong>Date:</strong> {appointment.formattedDateTime}
-                      <span className="toggle-icon">
-                        {appointment.isOpen ? <FaChevronUp /> : <FaChevronDown />}
-                      </span>
-                    </div>
-                    <Collapse isOpened={appointment.isOpen}>
-                      <div className="appointment-details">
-                        <strong>Technician:</strong> {appointment.tech} <br />
-                        <strong>Tasks:</strong>
-                        <ul>
-                          {appointment.details.tasks && appointment.details.tasks.length > 0 ? (
-                            appointment.details.tasks.map((task, index) => (
-                              <li key={index}>
-                                {task.completed ? (
-                                  <FaCheckCircle color="green" />
-                                ) : (
-                                  <FaTimesCircle color="red" />
-                                )}
-                                {' '}
-                                {task.text}
-                              </li>
-                            ))
-                          ) : (
-                            <li>No tasks available</li>
-                          )}
-                        </ul>
-                        <strong>Comments: </strong> {appointment.details.comments || 'No comments available'}
-                      </div>
-                    </Collapse>
-                  </div>
-                ))
-              ) : (
-                <p>No service history available for this vehicle.</p>
-              )}
-            </div>
-            <button onClick={() => setSelectedAccount(null)}>Close</button>
+      <main className="page-content accounts-page">
+        <div className="page-header">
+          <div>
+            <p className="page-eyebrow">Customer profiles</p>
+            <h1 className="page-title">Accounts</h1>
           </div>
-        </>
-      )}
+        </div>
+
+        <div className="card search-card">
+          <div className="search-box">
+            <label className="field-label" htmlFor="account-search">
+              Search by vehicle registration
+            </label>
+            <input
+              id="account-search"
+              type="text"
+              placeholder="Search by Vehicle Reg"
+              value={searchReg}
+              onChange={handleSearchChange}
+              className="input"
+            />
+          </div>
+        </div>
+
+        <div className="card table-card">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Vehicle Reg</th>
+                <th>Customer Name</th>
+                <th>Customer Phone</th>
+                <th>Vehicle Make</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(searchReg === '' ? accounts : filteredAccounts).map(account => (
+                <tr key={account.vehicleReg}>
+                  <td>{account.vehicleReg}</td>
+                  <td>{account.customerName}</td>
+                  <td>{account.customerPhone}</td>
+                  <td>{account.vehicleMake}</td>
+                  <td>
+                    <button
+                      className="btn btn-secondary table-action"
+                      onClick={() => handleViewServiceHistory(account.vehicleReg)}
+                    >
+                      History
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {selectedAccount && (
+          <>
+            <div className="modal-overlay" onClick={() => setSelectedAccount(null)}></div>
+            <div className="service-history-modal">
+              <h2>Service History for {selectedAccount}</h2>
+              <div className="service-history-list">
+                {serviceHistory.length > 0 ? (
+                  serviceHistory.map(appointment => (
+                    <div key={appointment.id} className="appointment-entry">
+                      <div
+                        className="appointment-summary"
+                        onClick={() =>
+                          setServiceHistory(prev =>
+                            prev.map(app =>
+                              app.id === appointment.id
+                                ? { ...app, isOpen: !app.isOpen }
+                                : app
+                            )
+                          )
+                        }
+                      >
+                        <strong>Date:</strong> {appointment.formattedDateTime}
+                        <span className="toggle-icon">
+                          {appointment.isOpen ? <FaChevronUp /> : <FaChevronDown />}
+                        </span>
+                      </div>
+                      <Collapse isOpened={appointment.isOpen}>
+                        <div className="appointment-details">
+                          <strong>Technician:</strong> {appointment.tech} <br />
+                          <strong>Tasks:</strong>
+                          <ul>
+                            {appointment.details.tasks && appointment.details.tasks.length > 0 ? (
+                              appointment.details.tasks.map((task, index) => (
+                                <li key={index}>
+                                  {task.completed ? (
+                                    <FaCheckCircle color="green" />
+                                  ) : (
+                                    <FaTimesCircle color="red" />
+                                  )}
+                                  {' '}
+                                  {task.text}
+                                </li>
+                              ))
+                            ) : (
+                              <li>No tasks available</li>
+                            )}
+                          </ul>
+                          <strong>Comments: </strong> {appointment.details.comments || 'No comments available'}
+                        </div>
+                      </Collapse>
+                    </div>
+                  ))
+                ) : (
+                  <p>No service history available for this vehicle.</p>
+                )}
+              </div>
+              <button className="btn btn-primary modal-close" onClick={() => setSelectedAccount(null)}>
+                Close
+              </button>
+            </div>
+          </>
+        )}
+      </main>
     </div>
   );
 };
