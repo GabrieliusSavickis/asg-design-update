@@ -72,55 +72,6 @@ const TechnicianHoursPage = () => {
   }, [startDate, endDate, appointmentsCollectionName]); // Add appointmentsCollectionName as a dependency
 
   return (
-    <div className="page-shell">
-      <Header />
-      <main className="page-content">
-        <div className="page-header">
-          <div>
-            <p className="page-eyebrow">Performance overview</p>
-            <h1 className="page-title">Technician Hours</h1>
-          </div>
-          <div className="page-actions">
-            <button
-              onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
-              className="btn btn-secondary calendar-icon-button"
-            >
-              <FontAwesomeIcon icon={faCalendarAlt} />
-              Select range
-            </button>
-          </div>
-        </div>
-
-        {isDatePickerOpen && (
-          <div className="date-picker-container">
-            <DatePicker
-              selected={startDate}
-              onChange={(dates) => {
-                const [start, end] = dates;
-                setStartDate(start);
-                setEndDate(end);
-              }}
-              startDate={startDate}
-              endDate={endDate}
-              selectsRange
-              inline
-            />
-          </div>
-        )}
-
-        <div className="card table-card">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Technician</th>
-                <th>Total Hours</th>
-              </tr>
-            </thead>
-            <tbody>
-              {technicianHours.map((tech, index) => (
-                <tr key={index}>
-                  <td>{tech.tech}</td>
-                  <td>
     <div className="min-h-screen bg-slate-50">
       <Header />
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-12 pt-6">

@@ -1,8 +1,7 @@
 .calendar-container {
   display: grid;
-  background-color: transparent;
-  border-radius: 16px;
-  overflow: hidden;
+  /* grid-template-columns: 100px repeat(4, 1fr); Adjust column sizes */
+  background-color: #ddd;
 }
 
 .calendar-header {
@@ -11,16 +10,13 @@
 
 .time-header {
   grid-column: 1;
-  background-color: #f8fafc;
+  background-color: #f0f0f0;
 }
 
 .tech-header {
-  background-color: #f8fafc;
-  padding: 12px 8px;
+  background-color: #f0f0f0;
+  padding: 5px;
   text-align: center;
-  font-weight: 600;
-  color: #334155;
-  border-bottom: 1px solid #e2e8f0;
 }
 
 .calendar-body {
@@ -32,25 +28,16 @@
 }
 
 .time-label {
-  background-color: #f8fafc;
-  padding: 12px 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
   text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: #475569;
-  border-right: 1px solid #e2e8f0;
 }
 
 .time-slot {
   background-color: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #ddd;
   position: relative;
   overflow: visible;
-  transition: background-color 0.2s ease;
-}
-
-.time-slot:hover {
-  background-color: #f8fafc;
 }
 
 .time-slot.lunch-time-slot {
@@ -60,8 +47,8 @@
 
 .appointment {
   color: #fff;
-  padding: 8px;
-  border-radius: 12px;
+  padding: 5px;
+  border-radius: 5px;
   position: absolute;
   top: 0;
   left: 0;
@@ -75,29 +62,26 @@
   z-index: 1;
   box-sizing: border-box;
   transition: background-color 0.3s ease; /* Smooth transition for color changes */
-  font-size: 0.85em;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2);
+  font-size: 0.9em;
 }
 
 /* New styles for lunch break */
 .lunch-break-divider {
   grid-column: 1 / span 5; /* Span across the entire grid */
-  background-color: #eff6ff;
+  background-color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 44px; /* Adjust height if needed */
+  height: 38px; /* Adjust height if needed */
   font-weight: bold;
   z-index: 10; /* This makes the lunch break divider appear on top */
-  color: #1e3a8a;
+  color: #555;
 }
 
 .lunch-break-label {
   text-align: center;
-  font-size: 0.95rem;
-  color: #1e3a8a;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: #555;
 }
 
 /* Tablet-specific styles in portrait mode */
@@ -137,5 +121,4 @@
   margin-bottom: 2px;
   text-align: center;
   color: #fff; /* Ensures it contrasts on your colored background */
-  font-weight: 600;
 }
